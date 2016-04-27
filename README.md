@@ -19,7 +19,7 @@
 
 ###### Modify runServer.php
 ```php  	
-  require_once('/path/folder/WebSocketServer.php');
+  require_once('/path/to/WebSocketServer.php');
   $myServer = new WSS\WebSocketServer;
 ```
 ###### Command
@@ -31,7 +31,7 @@
 
 ###### Modify runClient.php
 ```php
-  require_once('/path/folder/WebSocketClient.php'); 
+  require_once('/path/to/WebSocketClient.php'); 
   
   $wb = new WSS\WebSocketClient;
   $data = '{"name": "XXX", "recevier": "XXX", "text": "XXX"}';  //data to be send
@@ -48,3 +48,14 @@
 ```bash
   $ php -q runClient.php
 ```
+
+<br>
+#### [OpenSSL changes in PHP 5.6.x](http://php.net/manual/en/migration56.openssl.php)
+###### Stream wrappers now verify peer certificates and host names by default when using SSL/TLS
+- Add openssl config in php.ini
+```bash
+  [openssl]
+  openssl.cafile = "/path/to/server.pem"
+  openssl.capath = "/path/to/"
+```
+- When you generate a server.pem, the CA's common name (CN) should be same as your server's domain name or IP.
